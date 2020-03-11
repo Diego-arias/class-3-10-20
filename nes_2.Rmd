@@ -42,10 +42,30 @@ x <- nes %>%
 ```{r model_1, cache=TRUE}
 fit_1 <- stan_glm(data = x, partyid7 ~ gender + race + real_ideo, refresh = 0)
 
+
 ```
 
 ```{r show_model, comment=NA}
 fit_1
+
+lm(data = x, partyid7 ~ gender + race + real_ideo, refresh = 0)
+```
+
+```{r loo_1, cache = TRUE}
+
+#leave one out
+loo_1 <- loo(fit_1)
+```
+
+```{r}
+fit_2<- stan_glm(data = x, partyid7 ~ educ1 + income , refresh = 0)
+
+
+loo_2 <- loo(fit_2)
+```
+
+```{r}
+loo_compare(loo_1,loo_2)
 ```
 
 
